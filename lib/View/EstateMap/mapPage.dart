@@ -118,7 +118,7 @@ class _MapScreenState extends State<MapScreen> {
               ),
               children: [
                 TileLayer(
-                  urlTemplate: AppUtil.testURL,
+                  urlTemplate: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
                   // CartoDB Positron
                   subdomains: ['a', 'b', 'c'],
                 ),
