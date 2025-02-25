@@ -11,7 +11,7 @@ import 'package:fl_location/fl_location.dart';
 import 'package:realestate/Constants/colors.dart';
 import 'package:realestate/Controller/service/buildLocation.dart';
 
-import '../../View/Search/mapPage.dart';
+import '../../View/EstateMap/mapPage.dart';
 
 import '../values.dart';
 import 'component/navv.dart';
@@ -129,7 +129,7 @@ class _BottomNavState extends State<BottomNav>
       barColor: Palette.black,
       start: 20,
       end: 1,
-      width: 300,
+      width: 280,
       icon: ImagePath.solarMagnifer,
       icon1: ImagePath.solarChat,
       icon2: ImagePath.solarHome,

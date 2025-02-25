@@ -53,7 +53,7 @@ class _Bottom_BarState extends State<Bottom_Bar>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 4),
       vsync: this,
     );
     // Set the animation to start off the screen (below) and slide up
@@ -126,9 +126,11 @@ class _Bottom_BarState extends State<Bottom_Bar>
           child: SlideTransition(
             position: _offsetAnimation,
             child: ClipRRect(
+
               borderRadius: BorderRadius.circular(50),
               child: Container(
-                height: 70, // Adjusted height for better appearance
+
+                height: 60, // Adjusted height for better appearance
                 width: widget.width,
                 decoration: BoxDecoration(
                   color: widget.barColor,

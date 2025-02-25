@@ -81,7 +81,7 @@ class _AppBarContentState extends State<AppBarContent> {
           ),
 
           duration: Duration(seconds: 5),
-          width: _isContainerExpanded ? 185 : 10,
+          width: _isContainerExpanded ? 165 : 10,
           height: 40,
           curve: Curves.easeInOut,
           //  alignment: Alignment.center,

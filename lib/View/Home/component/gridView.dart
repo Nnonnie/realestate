@@ -25,7 +25,7 @@ class AnimatedGridView extends StatelessWidget {
         future: _gridDataFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator(color: Palette.transparant,));
+            return Center(child: CircularProgressIndicator(color: Palette.Orange,));
           } else if (snapshot.hasError) {
             // Handle error
             return Center(child: Text('Error: ${snapshot.error}'));
@@ -39,51 +39,54 @@ class AnimatedGridView extends StatelessWidget {
                 borderRadius:
                     BorderRadius.circular(15), // Apply the curved radius here
               ),
-              child: GridView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverQuiltedGridDelegate(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 4,
-                  mainAxisSpacing: 2,
-                  pattern: [
-                    QuiltedGridTile(1, 2),
-                    QuiltedGridTile(1, 1),
-                    QuiltedGridTile(1, 1),
-                    QuiltedGridTile(1, 2),
-                  ],
-                ),
-                itemCount: gridData.length,
-                itemBuilder: (context, index) {
-                  Estate tile = gridData[index];
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 80.0),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverQuiltedGridDelegate(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 4,
+                    mainAxisSpacing: 2,
+                    pattern: [
+                      QuiltedGridTile(1, 2),
+                      QuiltedGridTile(1, 1),
+                      QuiltedGridTile(1, 1),
+                      QuiltedGridTile(1, 2),
+                    ],
+                  ),
+                  itemCount: gridData.length,
+                  itemBuilder: (context, index) {
+                    Estate tile = gridData[index];
 
-                  return Card(
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          Image.asset(
-                            tile.image,
-                            fit: BoxFit.cover,
-                          ),
-                          Positioned(
-                            bottom: 10,
-                            left: 10,
-                            right: 10,
-                            child: SlidingCard(
-                                location: tile.location,
-                                width: _getSlidingCardWidth(index, context)),
-                          ),
-                        ],
+                    return Card(
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                    ),
-                  );
-                },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            Image.asset(
+                              tile.image,
+                              fit: BoxFit.cover,
+                            ),
+                            Positioned(
+                              bottom: 10,
+                              left: 10,
+                              right: 10,
+                              child: SlidingCard(
+                                  location: tile.location,
+                                  width: _getSlidingCardWidth(index, context)),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
             );
           } else {

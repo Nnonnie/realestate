@@ -108,7 +108,7 @@ class _MapScreenState extends State<MapScreen> {
       body: _currentLocation == null
           ? Center(
               child: CircularProgressIndicator(
-              color: Palette.black,
+              color: Palette.Orange,
             ))
           : FlutterMap(
               options: MapOptions(
