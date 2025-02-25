@@ -34,7 +34,7 @@ class _MapScreenState extends State<MapScreen> {
     super.initState();
     _checkPermissionAndGetLocation();
 
-    delayedFuture = Future.delayed(Duration(seconds: 10), () {
+    delayedFuture = Future.delayed(Duration(seconds: 6), () {
       if (mounted) {
         setState(() {
           isExpanded = true;
