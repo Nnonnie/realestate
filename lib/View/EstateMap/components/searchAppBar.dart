@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:realestate/Model/address.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../Constants/theme/text_themes.dart';
@@ -9,11 +8,8 @@ import '../../../constants/values.dart';
 import '../../../constants/colors.dart';
 
 class SearchAppBar extends StatefulWidget {
-  final Address location;
-
   const SearchAppBar({
     Key? key,
-    required this.location,
   }) : super(key: key);
 
   @override
@@ -21,32 +17,39 @@ class SearchAppBar extends StatefulWidget {
 }
 
 class _SearchAppBarState extends State<SearchAppBar> {
-  bool _isContainerExpanded = false;
-  bool _isAvatarExpanded = false;
+  bool isContainerExpanded = false;
+  bool isAvatarExpanded = false;
   bool isTextVisible = false;
+  late final Future<void> delayedFuture;
+  late final Future<void> delayedFu;
+  late final Future<void> delayedFufu;
 
   @override
   void initState() {
     super.initState();
 
     // First animate container expansion after the widget is rendered
-    Future.delayed(Duration(milliseconds: 200), () {
-      setState(() {
-        _isContainerExpanded = true;
-      });
-
-      // After container animation completes, start avatar animation
-      Future.delayed(Duration(seconds: 1), () {
+    if (mounted) {
+      delayedFu = Future.delayed(Duration(milliseconds: 200), () {
         setState(() {
-          _isAvatarExpanded = true;
+          isContainerExpanded = true;
+        });
+
+        // After container animation completes, start avatar animation
+        delayedFuture = Future.delayed(Duration(seconds: 1), () {
+          setState(() {
+            isAvatarExpanded = true;
+          });
         });
       });
-    });
-    Future.delayed(Duration(seconds: 5), () {
-      setState(() {
-        isTextVisible = true;
+    }
+    if (mounted) {
+      delayedFufu = Future.delayed(Duration(seconds: 5), () {
+        setState(() {
+          isTextVisible = true;
+        });
       });
-    });
+    }
   }
 
   @override
@@ -65,15 +68,15 @@ class _SearchAppBarState extends State<SearchAppBar> {
                 BorderRadius.circular(20), // Apply the curved radius here
           ),
 
-          duration: Duration(seconds: 5),
-          width: _isContainerExpanded ? 250 : 10,
+          duration: Duration(seconds: 2),
+          width: isContainerExpanded ? 250 : 10,
           height: 40,
-          curve: Curves.easeIn,
+          curve: Curves.easeInOutExpo,
           //  alignment: Alignment.center,
           child: Align(
             alignment: Alignment.centerLeft,
             child: AnimatedOpacity(
-              opacity: _isContainerExpanded ? 1 : 0,
+              opacity: isContainerExpanded ? 1 : 0,
               duration: Duration(seconds: 1),
               child: Visibility(
                 visible: isTextVisible,
@@ -90,10 +93,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
                       child: Container(
                         width: 150,
                         child: Text(
-                          (widget.location.street.toString() != "Unknown" ||
-                                  widget.location.street.toString() != "null")
-                              ? widget.location.country.toString()
-                              : "Saint Petersburg",
+                          "Saint Petersburg",
                           style: TextThemes.whiteButtonText,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -111,8 +111,8 @@ class _SearchAppBarState extends State<SearchAppBar> {
         AnimatedContainer(
           duration: Duration(seconds: 1),
           curve: Curves.easeInOut,
-          width: _isAvatarExpanded ? 40 : 10,
-          height: _isAvatarExpanded ? 40 : 10,
+          width: isAvatarExpanded ? 40 : 10,
+          height: isAvatarExpanded ? 40 : 10,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.white,

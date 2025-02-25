@@ -20,13 +20,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
-  late Animation<int> _numberAnimation;
-  late Animation<int> _numbereAnimation;
-  late Animation<Offset> _slideAnimation;
-  late Future<List<Estate>> _gridDataFuture;
-  bool _isAvatarExpanded = false;
+  late AnimationController controller;
+  late Animation<double> animation;
+  late Animation<int> numberAnimation;
+  late Animation<int> numbereAnimation;
+  late Animation<Offset> slideAnimation;
+  late Future<List<Estate>> gridDataFuture;
+  bool isAvatarExpanded = false;
   bool isExpanded = false;
 
   @override
@@ -34,36 +34,36 @@ class _HomePageState extends State<HomePage>
     super.initState();
     Future.delayed(Duration(seconds: 1), () {
       setState(() {
-        _isAvatarExpanded = true;
+        isAvatarExpanded = true;
         isExpanded = true;
       });
     });
 
-    _controller = AnimationController(
+    controller = AnimationController(
       duration: Duration(seconds: 5),
       vsync: this,
     )..forward();
-    _gridDataFuture = Fetch.fetchGridDataFromServer();
+    gridDataFuture = Fetch.fetchGridDataFromServer();
 
-    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+    animation = Tween<double>(begin: 0.0, end: 1.0).animate(controller);
 
-    _numberAnimation = IntTween(begin: 50, end: 1034).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
+    numberAnimation = IntTween(begin: 50, end: 1034).animate(
+      CurvedAnimation(parent: controller, curve: Curves.easeOut),
     );
 
-    _numbereAnimation = IntTween(begin: 50, end: 2212).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
+    numbereAnimation = IntTween(begin: 50, end: 2212).animate(
+      CurvedAnimation(parent: controller, curve: Curves.easeOut),
     );
 
-    _slideAnimation = Tween<Offset>(
+    slideAnimation = Tween<Offset>(
       begin: Offset(0, 1),
       end: Offset(0, 0),
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+    ).animate(CurvedAnimation(parent: controller, curve: Curves.easeOut));
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    controller.dispose();
     super.dispose();
   }
 
@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage>
                         AppBarContent(),
                         SizedBox(height: 30),
                         FadeTransition(
-                            opacity: _animation,
+                            opacity: animation,
                             child: Align(
                                 alignment: Alignment.topLeft,
                                 child: Text("Hi, Marina",
@@ -101,10 +101,10 @@ class _HomePageState extends State<HomePage>
                         TextTransition(),
                         SizedBox(height: 30),
                         AnimatedCircleAndContainer(
-                          animation: _animation,
-                          numberAnimation: _numberAnimation,
-                          numbereAnimation :_numbereAnimation,
-                          isAvatarExpanded: _isAvatarExpanded,
+                          animation: animation,
+                          numberAnimation: numberAnimation,
+                          numbereAnimation :numbereAnimation,
+                          isAvatarExpanded: isAvatarExpanded,
 
                         ),
                         SizedBox(height: 30),
@@ -113,8 +113,8 @@ class _HomePageState extends State<HomePage>
                   ),
                 ),
                 AnimatedGridView(
-                  slideAnimation: _slideAnimation,
-                  gridDataFuture: _gridDataFuture,
+                  slideAnimation: slideAnimation,
+                  gridDataFuture: gridDataFuture,
                 ),
               ],
             ),

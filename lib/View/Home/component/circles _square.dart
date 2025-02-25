@@ -24,21 +24,34 @@ class AnimatedCircleAndContainer extends StatefulWidget {
   @override
   State<AnimatedCircleAndContainer> createState() =>
       _AnimatedCircleAndContainerState();
-
 }
 
 class _AnimatedCircleAndContainerState
     extends State<AnimatedCircleAndContainer> {
   bool isTextVisible = false;
+  late final Future<void> delayedFuture;
+
+  @override
+  void initState() {
+    delayedFuture = Future.delayed(Duration(seconds: 1), () {
+      if (mounted) {
+        setState(() {
+          isTextVisible = true;
+        });
+      }
+    });
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    delayedFuture;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-
-    Future.delayed(Duration(seconds: 1), () {
-      setState(() {
-        isTextVisible = true;
-      });
-    });
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -63,12 +76,12 @@ class _AnimatedCircleAndContainerState
                     Expanded(
                       child: Text("BUY", style: TextThemes.whiteSubtitle1),
                     ),
-                    SizedBox(height: 10),
                     Expanded(
                       // This will make sure this widget takes up remaining space
                       child: Text(widget._numberAnimation.value.toString(),
                           style: TextThemes.whiteWeightline5),
                     ),
+                    SizedBox(height: 10),
                     Expanded(
                       child: Text("offers", style: TextThemes.whiteSubtitle1),
                     ),
@@ -102,11 +115,12 @@ class _AnimatedCircleAndContainerState
                     Expanded(
                       child: Text("RENT", style: TextThemes.whiteButtonText),
                     ),
-                    SizedBox(height: 10),
+
                     Expanded(
                       child: Text(widget._numbereAnimation.value.toString(),
                           style: TextThemes.greyBigWeightline5),
                     ),
+                    SizedBox(height: 10),
                     Expanded(
                       child: Text("offers", style: TextThemes.whiteButtonText),
                     ),

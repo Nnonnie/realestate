@@ -15,29 +15,46 @@ class _AppBarContentState extends State<AppBarContent> {
   bool _isContainerExpanded = false;
   bool _isAvatarExpanded = false;
   bool isTextVisible = false;
+  late final Future<void> delayedFuture;
+  late final Future<void> delayedFut;
+  late final Future<void> delayedFu;
 
   @override
   void initState() {
     super.initState();
 
     // First animate container expansion after the widget is rendered
-    Future.delayed(Duration(milliseconds: 200), () {
-      setState(() {
-        _isContainerExpanded = true;
-      });
+    delayedFu = Future.delayed(Duration(milliseconds: 200), () {
+      if (mounted) {
+        setState(() {
+          _isContainerExpanded = true;
+        });
+      }
 
       // After container animation completes, start avatar animation
-      Future.delayed(Duration(seconds: 1), () {
+      delayedFuture = Future.delayed(Duration(seconds: 1), () {
+        if (mounted) {
+          setState(() {
+            _isAvatarExpanded = true;
+          });
+        }
+      });
+    });
+    delayedFut = Future.delayed(Duration(seconds: 5), () {
+      if (mounted) {
         setState(() {
-          _isAvatarExpanded = true;
+          isTextVisible = true;
         });
-      });
+      }
     });
-    Future.delayed(Duration(seconds: 5), () {
-      setState(() {
-        isTextVisible = true;
-      });
-    });
+  }
+
+  @override
+  void dispose() {
+    delayedFuture;
+    delayedFut;
+    delayedFu;
+    super.dispose();
   }
 
   @override

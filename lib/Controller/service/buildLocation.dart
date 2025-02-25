@@ -1,33 +1,35 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_location/fl_location.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import '../../Controller/service/estateLocation.dart';
 import '../../Model/location.dart';
+import 'package:http/http.dart' as http;
 
-LatLng? currentLocation; // To store current location
-List<EstateLocations> nearbyLocations = [];
+LatLng? currentLocation;
+List<EstateLocations> nnearbyLocations = [];
 
 class buildLocation {
-  static Future<void> getCurrentLocation() async {
+  // To store current location
+
+  static Future<LatLng?> getCurrentLocation() async {
     try {
       Location location = await FlLocation.getLocation();
-      if (location.latitude == null || location.longitude == null) {
-        // Location is not available, prompt the user to enable location
-        //showLocationDialog(con);
+      if (location.latitude == 0.0 || location.longitude == 0.0) {
       } else {
-        // Location fetched successfully
-
         currentLocation = LatLng(location.latitude!, location.longitude!);
 
         // Fetch nearby locations after getting the current location
         fetchNearbyLocations();
+        return currentLocation;
       }
     } catch (e) {
       // Error occurred, handle it (e.g., show error message)
       print("Error fetching location: $e");
     }
+    return currentLocation;
   }
 
   // Fetch nearby locations (simulating an API call)
@@ -36,7 +38,7 @@ class buildLocation {
       List<EstateLocations> nearbyLocations =
           await fetchNearbyEstateLocationss(currentLocation!);
 
-      nearbyLocations = nearbyLocations;
+      nnearbyLocations = nearbyLocations;
     }
   }
 
@@ -61,4 +63,6 @@ class buildLocation {
       },
     );
   }
+
+
 }

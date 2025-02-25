@@ -20,21 +20,35 @@ class SlidingCard extends StatefulWidget {
 class _SlidingCardState extends State<SlidingCard> {
   bool _isExpanded = false;
   bool isTextVisible = false;
+  late final Future<void> delayedFuture;
+  late final Future<void> delayedFu;
 
   @override
   void initState() {
     super.initState();
     // Automatically expand the container after a short delay when the screen loads
-    Future.delayed(Duration(seconds: 1), () {
-      setState(() {
-        _isExpanded = true;
-      });
+    delayedFu = Future.delayed(Duration(seconds: 1), () {
+      if (mounted) {
+        setState(() {
+          _isExpanded = true;
+        });
+      }
     });
-    Future.delayed(Duration(seconds: 5), () {
-      setState(() {
-        isTextVisible = true;
-      });
+    delayedFuture = Future.delayed(Duration(seconds: 3), () {
+      if (mounted) {
+        setState(() {
+          isTextVisible = true;
+        });
+      }
     });
+  }
+
+  @override
+  void dispose() {
+    delayedFuture;
+    delayedFu;
+
+    super.dispose();
   }
 
   @override
@@ -50,7 +64,7 @@ class _SlidingCardState extends State<SlidingCard> {
             ),
           ),
           AnimatedContainer(
-            duration: Duration(seconds: 5),
+            duration: Duration(seconds: 4),
             width: _isExpanded ? widget.width : 50,
             // Use the passed width
             height: 50,
@@ -64,8 +78,7 @@ class _SlidingCardState extends State<SlidingCard> {
                       blurRadius: 30,
                       offset: Offset(2, 2))
                 ],
-                border:
-                    Border.all(color: Colors.transparent, width: 1.0),
+                border: Border.all(color: Colors.transparent, width: 1.0),
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -97,8 +110,9 @@ class _SlidingCardState extends State<SlidingCard> {
                   ),
                 ),
                 AnimatedAlign(
-                  alignment:
-                      _isExpanded ? Alignment.centerRight : Alignment.centerLeft,
+                  alignment: _isExpanded
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
                   duration: Duration(milliseconds: 300),
                   curve: Curves.easeInOut,
                   child: Padding(

@@ -98,13 +98,13 @@ class InfoBubbleDialogWidgetState extends State<InfoBubbleDialogWidget> {
       bubbleTipLeftPadding =
           widgetCenterX - widget.bubblePadding - bubbleTipHalfWidth;
 
-      ///If widget is very close to screen.
+
       if (bubbleTipLeftPadding < 0) bubbleTipLeftPadding = 0;
     } else {
       var widgetLeft = screenWidth - widget.bubbleWidth - widget.bubblePadding;
       bubbleTipLeftPadding = widgetCenterX - widgetLeft - bubbleTipHalfWidth;
 
-      ///If widget is very close to screen.
+
       if (bubbleTipLeftPadding > widget.bubbleWidth - widget.bubbleTipWidth) {
         bubbleTipLeftPadding = widget.bubbleWidth - widget.bubbleTipWidth;
       }
@@ -168,14 +168,13 @@ class InfoBubbleDialogWidgetState extends State<InfoBubbleDialogWidget> {
                     children: [
                       Column(
                         children: [
-                          // The dynamic title widget that depends on content
 
-                          // Create the dynamic list of options
                           ...options.map((option) {
                             return InkWell(
                               onTap: () {
                                 widget.onContentChanged(option['value']);
-                                print(widget.onContentChanged);// Update content state based on option value
+                                print(widget.onContentChanged);
+                                Navigator.pop(context);
                               },
                               child: Row(
                                 children: [
@@ -200,7 +199,7 @@ class InfoBubbleDialogWidgetState extends State<InfoBubbleDialogWidget> {
                               ),
                             );
                           }).toList(),
-                          // Map over options and create each InkWell dynamically
+
                         ],
                       ),
                       const SizedBox(height: 12),

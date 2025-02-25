@@ -52,20 +52,20 @@ class TextThemes {
       );
 
   static TextStyle get whiteHeadline5 => _poppinsTextTheme.headline5!.copyWith(
-        fontSize: Sizes.s20,
+        fontSize: Sizes.s24,
         color: Palette.deardGrey,
       );
 
   static TextStyle get greyBigWeightline5 =>
       _poppinsTextTheme.headline5!.copyWith(
-        fontSize: Sizes.s32,
+        fontSize: Sizes.s48,
         color: Palette.deardGrey,
         fontWeight: FontWeight.w600,
       );
 
   static TextStyle get whiteWeightline5 =>
       _poppinsTextTheme.headline5!.copyWith(
-        fontSize: Sizes.s32,
+        fontSize: Sizes.s48,
         color: Palette.white,
         fontWeight: FontWeight.w600,
       );

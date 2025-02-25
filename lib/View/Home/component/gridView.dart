@@ -25,7 +25,7 @@ class AnimatedGridView extends StatelessWidget {
         future: _gridDataFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator(color: Palette.Orange,));
+            return Center(child: CircularProgressIndicator(color: Palette.transparant,));
           } else if (snapshot.hasError) {
             // Handle error
             return Center(child: Text('Error: ${snapshot.error}'));

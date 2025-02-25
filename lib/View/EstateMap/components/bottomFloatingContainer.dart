@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:realestate/Constants/bubbleHelp/bubbleInfor.dart';
-import 'package:realestate/Model/address.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../Constants/bubbleHelp/options.dart';
@@ -105,7 +104,7 @@ class _BottomFLoatingContainerState extends State<BottomFLoatingContainer> {
               borderRadius:
                   BorderRadius.circular(20), // Apply the curved radius here
             ),
-            duration: Duration(seconds: 5),
+            duration: Duration(seconds: 2),
             width: _isContainerExpanded ? 150 : 10,
             // Animating width
             height: 40,

@@ -12,34 +12,34 @@ Future<List<EstateLocations>> fetchNearbyEstateLocationss(LatLng currentEstateLo
   // List of nearby EstateLocationss (simulated data, could be fetched from an API)
   List<EstateLocations> nearbyEstateLocationss = [
     EstateLocations(
-      latitude: currentEstateLocations.latitude + 0.01,
+      latitude: currentEstateLocations.latitude + 0.02,
       longitude: currentEstateLocations.longitude,
-      name: "EstateLocations 1 (North)",
+      name: "10,3 mmP",
     ),
     EstateLocations(
-      latitude: currentEstateLocations.latitude - 0.01,
+      latitude: currentEstateLocations.latitude - 0.02,
       longitude: currentEstateLocations.longitude,
-      name: "EstateLocations 2 (South)",
+      name: "13,3 mmP",
     ),
     EstateLocations(
       latitude: currentEstateLocations.latitude,
-      longitude: currentEstateLocations.longitude + 0.01,
-      name: "EstateLocations 3 (East)",
+      longitude: currentEstateLocations.longitude + 0.02,
+      name: "11,3 mmP",
     ),
     EstateLocations(
       latitude: currentEstateLocations.latitude,
-      longitude: currentEstateLocations.longitude - 0.01,
-      name: "EstateLocations 4 (West)",
+      longitude: currentEstateLocations.longitude - 0.02,
+      name: "6,95 mmP",
     ),
     EstateLocations(
-      latitude: currentEstateLocations.latitude + 0.005,
+      latitude: currentEstateLocations.latitude + 0.004,
       longitude: currentEstateLocations.longitude + 0.005,
-      name: "EstateLocations 5 (Northeast)",
+      name: "8,5 mmP",
     ),
     EstateLocations(
       latitude: currentEstateLocations.latitude - 0.005,
       longitude: currentEstateLocations.longitude - 0.005,
-      name: "EstateLocations 6 (Southwest)",
+      name: "7,8 mmP",
     ),
   ];
 
